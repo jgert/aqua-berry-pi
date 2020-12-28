@@ -13,7 +13,7 @@ type temperatureData struct {
 }
 
 func (t temperatureData) GetDateTime() time.Time {
-	return t.UpdatedAt
+	return t.DateTime
 }
 
 func (t temperatureData) GetValue() float64 {
