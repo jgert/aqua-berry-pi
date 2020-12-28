@@ -8,8 +8,8 @@ import (
 )
 
 type TemperatureData struct {
-	Timestamp time.Time `json:"timestamp"`
-	Value     float64   `json:"value"`
+	ScanTime time.Time `json:"timestamp"`
+	Value    float64   `json:"value"`
 }
 
 type temperatureDataHandler struct {
@@ -42,8 +42,8 @@ func (t temperatureDataHandler) values(w http.ResponseWriter, r *http.Request) {
 	items := make([]TemperatureData, len(data))
 	for i, v := range data {
 		items[i] = TemperatureData{
-			Timestamp: v.GetDateTime(),
-			Value:     v.GetValue(),
+			ScanTime: v.GetDateTime(),
+			Value:    v.GetValue(),
 		}
 	}
 	respondJSON(items, w)
