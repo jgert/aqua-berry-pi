@@ -57,8 +57,8 @@ func scan(
 		}
 		fmt.Printf("%s: %2.2f\n", v.GetName(), value)
 		err = dataStore.Add(v.GetID(), model{
-			Timestamp: scanTime,
-			Value:     value,
+			ScanTime: scanTime,
+			Value:    value,
 		})
 		if err != nil {
 			log.Printf(err.Error())
@@ -70,7 +70,7 @@ func scan(
 type model api.TemperatureData
 
 func (m model) GetDateTime() time.Time {
-	return m.Timestamp
+	return m.ScanTime
 }
 
 func (m model) GetValue() float64 {

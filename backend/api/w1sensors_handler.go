@@ -33,8 +33,8 @@ func (h *w1SensorsHandler) getSensorValue(w http.ResponseWriter, r *http.Request
 	}
 
 	data := TemperatureData{
-		Timestamp: time.Now(),
-		Value:     val,
+		ScanTime: time.Now(),
+		Value:    val,
 	}
 
 	respondJSON(data, w)
