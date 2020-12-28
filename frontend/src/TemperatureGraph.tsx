@@ -33,6 +33,26 @@ export class TemperatureGraph extends React.Component<Props, State> {
         this.reload()
     }
 
+    prevPeriod() {
+        const to = this.state.from
+        const from = new Date(to)
+        from.setHours(-24)
+        this.setState({
+            from: from,
+            to: to
+        }, this.reload)
+    }
+
+    nextPeriod() {
+        const from = this.state.to
+        const to = new Date(from)
+        to.setHours(24)
+        this.setState({
+            from: from,
+            to: to
+        }, this.reload)
+    }
+
     reload() {
         this.abortController.abort()
         this.abortController = new AbortController()
@@ -77,7 +97,9 @@ export class TemperatureGraph extends React.Component<Props, State> {
     render() {
         const dataSets = Array.from(this.state.dataSets.values())
         return (<div>
-            <Button onClick={this.reload.bind(this)}>Reload</Button>
+            <Button onClick={this.prevPeriod.bind(this)}>Prev</Button>
+            {this.state.from.toLocaleDateString()}
+            <Button onClick={this.nextPeriod.bind(this)}>Next</Button>
             <GraphJSWrapper dataSets={dataSets}/>
         </div>)
     }
